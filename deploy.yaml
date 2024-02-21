@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: csi-document-management-service
+spec:
+  selector:
+    matchLabels:
+      app: csi-document-management-service
+  template:
+    metadata:
+      labels:
+        app: csi-document-management-service
+    spec:
+      containers:
+        - name: csi-document-management-service
+          image: csi-document-management-service:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
