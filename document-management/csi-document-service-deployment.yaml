@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: csi-document-management-service-deployment
+  labels:
+    app: csi-document-management-service-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: csi-document-management-service-deployment
+  template:
+    metadata:
+      name: csi-document-management-service-deployment
+      labels:
+        app: csi-document-management-service-deployment
+    spec:
+      containers:
+        - name: csi-document-management-service
+          image: csi-document-management-service:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: csi-document-management-service-config
+            - secretRef:
+                name: csi-document-management-service-secret
+      restartPolicy: Always
+      
